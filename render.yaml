@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: kavachx-frontend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: pnpm install && pnpm build
+    startCommand: pnpm start
+    branch: main
+    repo: https://github.com/tejaswinisa1/KavachX_disasterProject-main
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromTemplate: next_public_api_url
+    healthCheckPath: /
+    autoDeploy: true
+services:
+  - type: web
+    name: kavachx-backend
+    env: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    autoDeploy: true
